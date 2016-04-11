@@ -1,6 +1,29 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="colorPrimary">#3F51B5</color>
-    <color name="colorPrimaryDark">#303F9F</color>
-    <color name="colorAccent">#FF4081</color>
+
+    <color name="theme_bg_layout">#dedede</color>
+    <color name="white">#FFFFFFFF</color>
+    <color name="white_item">#fafafa</color>
+    <color name="white_light">#dedede</color>
+    <color name="black">#000</color>
+    <color name="transparent">#00000000</color>
+    <color name="gray">#808080</color>
+    <color name="match">#FFf12e40</color>
+    <color name="pink">#FFFF6E86</color>
+    <color name="theme">#FFFFD704</color>
+
+
+    <!--font -->
+    <color name="gray_hint">#8F000000</color>
+    <color name="gray_background">#fff1f1f1</color>
+    <color name="textcolor_white">#FFFFFFFF</color>
+    <color name="textcolor_theme">#FF333333</color>
+    <color name="textcolor_match">#DE333333</color>
+
+    <!-- dialog -->
+    <color name="dialog_bg">#dd000000</color>
+
+    <!--progress-->
+    <color name="theme_progress">#FFFF6E86</color>
+
 </resources>

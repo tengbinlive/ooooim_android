@@ -1,0 +1,7 @@
+<resources>
+    <string name="error_network">服务器繁忙。</string>
+    <string name="network_unavailable">网络连接不可用，请检查网络</string>
+    <string name="unknown">未知</string>
+    <string name="min_before">%s分钟前</string>
+    <string name="hour_before">%d小时前</string>
+</resources>

@@ -1,4 +1,12 @@
 apply plugin: 'com.android.application'
+apply plugin: 'com.droidtitan.lintcleaner'
+apply plugin: 'com.neenbedankt.android-apt'
+
+// Manifest version information!
+def versionMajor = 1
+def versionMinor = 0
+def versionPatch = 0
+def versionBuild = 1// bump for dogfood builds, public betas, etc.
 
 android {
     compileSdkVersion 23
@@ -7,20 +15,143 @@ android {
     defaultConfig {
         applicationId "com.ooooim"
         minSdkVersion 16
-        targetSdkVersion 23
-        versionCode 1
-        versionName "1.0"
+        //      解决Android L上通知显示异常问题，targetSdkVersion需要设置成22
+        targetSdkVersion 22
+        versionCode versionMajor * 10000 + versionMinor * 1000 + versionPatch * 100 + versionBuild
+        versionName "v${versionMajor}.${versionMinor}.${versionPatch}.${versionBuild}"
     }
-    buildTypes {
-        release {
-            minifyEnabled false
-            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+
+    signingConfigs {
+        ooooim {
+            storeFile file("../ooooim.jks");
+            storePassword "ooooim"
+            keyAlias "ooooim"
+            keyPassword "ooooim"
         }
     }
+
+    buildTypes {
+
+        debug {
+            buildConfigField "String", "API_HOST", "\"http://www.mytian.com.cn/\""//API Host
+            buildConfigField "boolean", "CONFIG_DEBUG", "true"// config info
+            buildConfigField "boolean", "LOG_DEBUG", "true"// log info
+            buildConfigField "boolean", "CHANNEL_DEBUG", "true"// channel info
+            debuggable true
+            minifyEnabled false
+            zipAlignEnabled false
+            shrinkResources false
+            proguardFiles 'proguard-rules.pro'
+            signingConfig signingConfigs.ooooim
+        }
+
+        alpha {
+            buildConfigField "String", "API_HOST", "\"http://www.mytian.com.cn/\""//API Host
+            buildConfigField "boolean", "CONFIG_DEBUG", "true"// config info
+            buildConfigField "boolean", "LOG_DEBUG", "false"// log info
+            buildConfigField "boolean", "CHANNEL_DEBUG", "false"// channel info
+            debuggable true
+            minifyEnabled false
+            zipAlignEnabled false
+            shrinkResources false
+            proguardFiles 'proguard-rules.pro'
+            signingConfig signingConfigs.ooooim
+        }
+
+        release {
+            buildConfigField "String", "API_HOST", "\"http://www.mytian.com.cn/\""//API Host
+            buildConfigField "boolean", "CONFIG_DEBUG", "false"// config info
+            buildConfigField "boolean", "LOG_DEBUG", "false"// log info
+            buildConfigField "boolean", "CHANNEL_DEBUG", "false"// channel info
+            debuggable false
+            minifyEnabled true
+            zipAlignEnabled true
+            // 移除无用的resource文件
+            shrinkResources false
+            proguardFiles 'proguard-rules.pro'
+            signingConfig signingConfigs.ooooim
+        }
+
+    }
+
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_7
+        targetCompatibility JavaVersion.VERSION_1_7
+    }
+
+    packagingOptions {
+        exclude 'META-INF/LICENSE.txt'
+        exclude 'META-INF/NOTICE.txt'
+    }
+
+    lintOptions {
+        abortOnError false
+        disable 'InvalidPackage'
+    }
+
+    dexOptions {
+        incremental = true;
+        preDexLibraries = false
+        javaMaxHeapSize "4g"
+    }
+
+    useLibrary 'org.apache.http.legacy'
+}
+
+repositories {
+    flatDir {
+        dirs 'libs' //this way we can find the .aar file in libs folder
+    }
+}
+
+lintCleaner {
+    // Exclude specific files
+    exclude = ['com_crashlytics_export_strings.xml', 'config.xml']
+
+    // Ability to ignore all resource files. False by default.
+    ignoreResFiles = true
+
+    // Default path is build/outputs/lint-results.xml
+    lintXmlFilePath = 'path/to/lint-results.xml'
 }
 
 dependencies {
     compile fileTree(dir: 'libs', include: ['*.jar'])
+    compile fileTree(dir: 'libs_share', include: ['*.jar'])
     testCompile 'junit:junit:4.12'
     compile 'com.android.support:appcompat-v7:23.2.1'
+    compile 'com.jakewharton:butterknife:8.0.0-SNAPSHOT'//布局id绑定生成 butterknife
+    compile 'org.greenrobot:eventbus:3.0.0'//事件派发
+    apt 'com.jakewharton:butterknife-compiler:8.0.0-SNAPSHOT'
+    compile 'de.greenrobot:greendao:2.1.0'//greendao 数据库
+    compile 'me.imid.swipebacklayout.lib:library:1.0.0'//滑动返回
+    compile 'com.makeramen:roundedimageview:2.2.1' //圆角 imageview
+    compile 'com.pnikosis:materialish-progress:1.5'//material进度条
+    compile 'com.github.orhanobut:logger:1.12' //日志
+    compile 'com.flaviofaria:kenburnsview:1.0.7'
+    compile 'com.bm.photoview:library:1.3.6'
+    compile 'com.wdullaer:materialdatetimepicker:2.0.1'
+    compile 'com.nineoldandroids:library:2.4.0'
+    compile 'com.github.bumptech.glide:glide:3.7.0'
+    compile 'com.mcxiaoke.volley:library:1.0.19'//volley
+    compile 'com.alibaba:fastjson:1.1.46.android'//fastjson
+    compile 'com.squareup.okhttp3:okhttp:3.2.0'// okhttp 网络处理
+    compile 'im.fir:fir-sdk:latest.integration@aar'// fir相关
+    compile 'com.wang.avi:library:1.0.0'
+    compile ('com.github.bumptech.glide:okhttp3-integration:1.4.0') {//glide 使用okhttp3
+        exclude group: 'glide-parent'
+    }
+    compile (group: 'org.apache.httpcomponents' , name: 'httpmime' , version: '4.2.5') {
+        exclude module: 'org.apache.httpcomponents:httpclient'
+    }
+    compile 'com.google.android.gms:play-services-analytics:8.4.0'//google analytics
+
+    compile(name: 'swipeLayout-release', ext: 'aar')
+    compile(name: 'niftymodaldialog-release', ext: 'aar')
+    compile(name: 'pulltorefresh-release', ext: 'aar')
+    compile(name: 'circularprogressbar-release', ext: 'aar')
+    compile(name: 'matchview-release', ext: 'aar')
 }
+
+apply plugin: 'com.google.gms.google-services'
+

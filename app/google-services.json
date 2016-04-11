@@ -1,0 +1,46 @@
+{
+  "project_info": {
+    "project_id": "ooooim-27d",
+    "project_number": "950694576818",
+    "name": "ooooim"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:950694576818:android:00c1988939617105",
+        "client_id": "android:com.ooooim",
+        "client_type": 1,
+        "android_client_info": {
+          "package_name": "com.ooooim",
+          "certificate_hash": []
+        }
+      },
+      "oauth_client": [],
+      "api_key": [],
+      "services": {
+        "analytics_service": {
+          "status": 2,
+          "analytics_property": {
+            "tracking_id": "UA-76002154-3"
+          }
+        },
+        "cloud_messaging_service": {
+          "status": 2,
+          "apns_config": []
+        },
+        "appinvite_service": {
+          "status": 1,
+          "other_platform_oauth_client": []
+        },
+        "google_signin_service": {
+          "status": 1
+        },
+        "ads_service": {
+          "status": 1
+        }
+      }
+    }
+  ],
+  "client_info": [],
+  "ARTIFACT_VERSION": "1"
+}

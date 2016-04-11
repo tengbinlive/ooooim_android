@@ -1,5 +1,50 @@
 <resources>
-    <!-- Default screen margins, per the Android Design guidelines. -->
-    <dimen name="activity_horizontal_margin">16dp</dimen>
-    <dimen name="activity_vertical_margin">16dp</dimen>
+    <!--actionbar-->
+    <dimen name="statusBar_height">0dip</dimen>
+    <dimen name="actionbar_statusBar_height">45dip</dimen>
+    <dimen name="actionbar_height">45dp</dimen>
+
+    <dimen name="sliding_menu_width">80dp</dimen>
+    <dimen name="actionbar_user_height">97dp</dimen>
+    <dimen name="actionbar_search_height">170dp</dimen>
+
+    <!--layout-->
+    <dimen name="content_gap">16dp</dimen>
+    <dimen name="content_gap_small">5dp</dimen>
+    <dimen name="content_left_margin">16dp</dimen>
+    <dimen name="content_right_margin">16dp</dimen>
+    <dimen name="content_gap_big">20dp</dimen>
+    <dimen name="content_1dp">1dp</dimen>
+    <dimen name="content_10dp">10dp</dimen>
+    <dimen name="content_1px">1px</dimen>
+
+    <!--font-->
+    <dimen name="font_actionbar">17sp</dimen>
+    <dimen name="font_actionbar_title">17sp</dimen>
+    <dimen name="font_medium">14sp</dimen>
+    <dimen name="font_least">12sp</dimen>
+    <dimen name="font_small">13sp</dimen>
+    <dimen name="font_big">16sp</dimen>
+    <dimen name="font_btn">15sp</dimen>
+
+    <!--layout_drawer-->
+    <dimen name="drawerlayout_width">240dp</dimen>
+    <dimen name="drawerlayout_menu_gap">10dp</dimen>
+    <dimen name="editheight">45dp</dimen>
+    <dimen name="button_height">40dp</dimen>
+    <dimen name="item_head_size">60dp</dimen>
+    <dimen name="foatingbt_size">30dp</dimen>
+    <dimen name="item_head_size_small">50dp</dimen>
+    <dimen name="item_comment_head_size">30dp</dimen>
+    <dimen name="elevation_height">2dp</dimen>
+    <dimen name="shadow">3dp</dimen>
+    <dimen name="corner_radius">5dp</dimen>
+    <dimen name="rounded_size">4dp</dimen>
+    <dimen name="bottom_bt_height">45dp</dimen>
+
+    <!--progress-->
+    <dimen name="progress_radius">30dp</dimen>
+    <dimen name="progress_thickness">3dp</dimen>
+    <dimen name="progress_radius_big">45dp</dimen>
+
 </resources>
